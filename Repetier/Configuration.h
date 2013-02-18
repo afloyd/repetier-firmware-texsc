@@ -119,7 +119,7 @@ the wrong direction change INVERT_X_DIR or INVERT_Y_DIR.
 
 /** \brief Micro stepping rate of X, Y and Y tower stepper drivers
 */
-#define MICRO_STEPS 8
+#define MICRO_STEPS 16
 
 /** \brief Number of delta moves in each line. Moves that exceed this figure will be split into multiple lines.
 Increasing this figure can use a lot of memory since 7 bytes * size of line buffer * MAX_SELTA_SEGMENTS_PER_LINE
@@ -227,12 +227,12 @@ A good start is 30 lower then the optimal value. You need to leave room for cool
 */
 #define EXT0_PID_INTEGRAL_DRIVE_MIN 60
 /** P-gain.  Overridden if EEPROM activated. */
-#define EXT0_PID_P   24
+#define EXT0_PID_P   11.35
 /** I-gain. Overridden if EEPROM activated.
 */
-#define EXT0_PID_I   0.88
+#define EXT0_PID_I   2.54
 /** Dgain.  Overridden if EEPROM activated.*/
-#define EXT0_PID_D 80
+#define EXT0_PID_D 12.74
 // maximum time the heater is can be switched on. Max = 255.  Overridden if EEPROM activated.
 #define EXT0_PID_MAX 255
 /** \brief Faktor for the advance algorithm. 0 disables the algorithm.  Overridden if EEPROM activated.
@@ -673,9 +673,9 @@ on this endstop.
 // For delta robot Z_MAX_LENGTH is maximum travel of the towers and should be set to the distance between the hotend
 // and the platform when the printer is at its home position.
 // If EEPROM is enabled these values will be overidden with the values in the EEPROM
-#define X_MAX_LENGTH 363.0
-#define Y_MAX_LENGTH 363.0
-#define Z_MAX_LENGTH 363.0
+#define X_MAX_LENGTH 372.63
+#define Y_MAX_LENGTH 372.63
+#define Z_MAX_LENGTH 372.63  
 
 // Coordinates for the minimum axis. Can also be negative if you want to have the bed start at 0 and the printer can go to the left side
 // of the bed. Maximum coordinate is given by adding the above X_MAX_LENGTH values.
@@ -688,7 +688,7 @@ on this endstop.
 // ##########################################################################################
 
 // Microstep setting (Only functional when stepper driver microstep pins are connected to MCU. Currently only works for RAMBO boards
-#define MICROSTEP_MODES {8,8,8,8,8} // [1,2,4,8,16]
+#define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
 #define MOTOR_CURRENT {175,175,175,175,175} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
@@ -719,7 +719,7 @@ on this endstop.
 
 /**  \brief Horizontal distance bridged by the diagonal push rod when the end effector is in the center. It is pretty close to 50% of the push rod length (250 mm).
 */
-#define DELTA_RADIUS (PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET+0.63)
+#define DELTA_RADIUS (PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET-1)
 
 /** \brief Enable counter to count steps for Z max calculations
 */

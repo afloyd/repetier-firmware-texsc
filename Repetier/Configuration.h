@@ -37,7 +37,7 @@ This means, after the first upload many variables can only be changed using the 
 M commands as described in the documentation. Changing these value sin the configuration.h
 has no effect. Parameters overriden by EEPROM settings are calibartion values, extruder 
 values except thermistor tables and some other parameter likely to change during usage
-like advance steps or ops mode.
+like advance or ops mode.
 To override EEPROM settings with config settings, set EEPROM_MODE 0
 
 */
@@ -158,7 +158,7 @@ Overridden if EEPROM activated.*/
 #define EXT0_X_OFFSET 0
 #define EXT0_Y_OFFSET 0
 // for skeinforge 40 and later, steps to pull the plasic 1 mm inside the extruder, not out.  Overridden if EEPROM activated.
-#define EXT0_STEPS_PER_MM 292
+#define EXT0_STEPS_PER_MM 292*2
 // What type of sensor is used?
 // 1 is 100k thermistor (Epcos B57560G0107F000 - RepRap-Fab.org and many other)
 // 2 is 200k thermistor
@@ -191,13 +191,13 @@ Overridden if EEPROM activated.*/
 // length of filament pulled inside the heater. For repsnap or older
 // skeinforge use hiher values.
 //  Overridden if EEPROM activated.
-#define EXT0_MAX_FEEDRATE 60
+#define EXT0_MAX_FEEDRATE 200
 // Feedrate from halted extruder in mm/s
 //  Overridden if EEPROM activated.
 #define EXT0_MAX_START_FEEDRATE 20
 // Acceleration in mm/s^2
 //  Overridden if EEPROM activated.
-#define EXT0_MAX_ACCELERATION 4500
+#define EXT0_MAX_ACCELERATION 2250
 /** Type of heat manager for this extruder. 
 - 0 = Simply switch on/off if temperature is reached. Works always.
 - 1 = PID Temperature control. Is better but needs good PID values. Defaults are a good start for most extruder.
@@ -227,12 +227,12 @@ A good start is 30 lower then the optimal value. You need to leave room for cool
 */
 #define EXT0_PID_INTEGRAL_DRIVE_MIN 60
 /** P-gain.  Overridden if EEPROM activated. */
-#define EXT0_PID_P   11.35
+#define EXT0_PID_P   27.5
 /** I-gain. Overridden if EEPROM activated.
 */
-#define EXT0_PID_I   2.54
+#define EXT0_PID_I   5.92
 /** Dgain.  Overridden if EEPROM activated.*/
-#define EXT0_PID_D 12.74
+#define EXT0_PID_D 32
 // maximum time the heater is can be switched on. Max = 255.  Overridden if EEPROM activated.
 #define EXT0_PID_MAX 255
 /** \brief Faktor for the advance algorithm. 0 disables the algorithm.  Overridden if EEPROM activated.
@@ -673,9 +673,9 @@ on this endstop.
 // For delta robot Z_MAX_LENGTH is maximum travel of the towers and should be set to the distance between the hotend
 // and the platform when the printer is at its home position.
 // If EEPROM is enabled these values will be overidden with the values in the EEPROM
-#define X_MAX_LENGTH 372.63
-#define Y_MAX_LENGTH 372.63
-#define Z_MAX_LENGTH 372.63  
+#define X_MAX_LENGTH 371.28
+#define Y_MAX_LENGTH 371.28
+#define Z_MAX_LENGTH 371.28
 
 // Coordinates for the minimum axis. Can also be negative if you want to have the bed start at 0 and the printer can go to the left side
 // of the bed. Maximum coordinate is given by adding the above X_MAX_LENGTH values.
@@ -691,14 +691,14 @@ on this endstop.
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
-#define MOTOR_CURRENT {175,175,175,175,175} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#define MOTOR_CURRENT {160,160,160,220,220} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
 //#define MOTOR_CURRENT {35713,35713,35713,35713,35713} // Values 0-65535 (3D Master 35713 = ~1A)
 
 // Delta settings
 #if DRIVE_SYSTEM==3
 /** \brief Delta rod length
 */
-#define DELTA_DIAGONAL_ROD 267.5  //269.0 // mm
+#define DELTA_DIAGONAL_ROD 269.0 // mm
 
 /** \brief Number of segments to generate for delta conversions per second of move
 */
@@ -719,7 +719,7 @@ on this endstop.
 
 /**  \brief Horizontal distance bridged by the diagonal push rod when the end effector is in the center. It is pretty close to 50% of the push rod length (250 mm).
 */
-#define DELTA_RADIUS (PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET-1)
+#define DELTA_RADIUS (PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET-.9)
 
 /** \brief Enable counter to count steps for Z max calculations
 */
